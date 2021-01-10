@@ -1,4 +1,5 @@
 import {createStore} from 'redux'
+
 const initState = {
     mode: 'WELCOME',
     welcome_content: {
@@ -14,7 +15,12 @@ const initState = {
 }
 
 function reducer(state=initState, action) {
+    if(action.type === 'WELCOME') {
+        return {...state, mode: 'WELCOME'}
+    } else if (action.type === 'READ'){
+        return {...state, mode: 'READ', selected_content_id: action.id}
+    }
     return state
 }
 
-export default createStore(reducer)
+export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())

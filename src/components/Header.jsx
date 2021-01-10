@@ -1,12 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class Header extends Component {
+const handleEvent = function () {
+    this.props.onClick()
+}
+
+class Header extends Component {
     render() {
         return (
-            <headers>
-                <h1>WEB</h1>
+            <header>
+                <h1><a href="#welcome" onClick={handleEvent.bind(this)}>WEB</a></h1>
                 World Wide Web
-            </headers>
+            </header>
         )
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onClick: function () {
+            dispatch({ type: 'WELCOME'})
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Header)
